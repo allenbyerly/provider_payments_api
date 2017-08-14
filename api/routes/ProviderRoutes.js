@@ -1,16 +1,16 @@
 'use strict';
 module.exports = function(app) {
-    var providers = require('../controllers/ProviderController');
+    var provider = require('../controllers/ProviderController');
 
 
     // todoList Routes
-    app.route('/providers')
-        .get(providers.list_all_providers)
-        .post(providers.create_a_provider);
+    app.route('/provider')
+        .get(provider.list_all_providers)
+        .post(provider.create_a_provider);
 
 
-    app.route('/providers/:providerId')
-        .get(todoList.read_a_provider)
-        .put(todoList.update_a_provider)
-        .delete(todoList.delete_a_provider);
+    app.route('/provider/:providerId')
+        .get(provider.read_a_provider)
+        .put(provider.update_a_provider)
+        .delete(provider.delete_a_provider);
 };

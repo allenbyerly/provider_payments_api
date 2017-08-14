@@ -21,7 +21,7 @@ var ProviderSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Providers', ProviderSchema);
+module.exports = mongoose.model('Provider', ProviderSchema);
 
 /*  {
         "Provider Name": "SOUTHEAST ALABAMA MEDICAL CENTER",
