@@ -4,9 +4,21 @@ var Schema = mongoose.Schema;
 
 
 var ProviderSchema = new Schema({
-    name: {
+    provider_name: {
         type: String,
         Required: 'Kindly enter the name of the provider'
+    },
+    provider_street: {
+        type: String,
+    },
+    provider_city: {
+        type: String,
+    },
+    provider_state: {
+        type: String,
+    },
+    provider_zip: {
+        type: Number
     },
     Created_date: {
         type: Date,
