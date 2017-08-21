@@ -6,7 +6,7 @@ from .models import Patient
 from .serializers import PatientSerializer
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
+@api_view(['GET', 'UPDATE', 'DELETE', 'PUT'])
 def get_delete_update_patient(request, pk):
     try:
         patient = Patient.objects.get(pk=pk)
@@ -15,7 +15,9 @@ def get_delete_update_patient(request, pk):
 
     # get details of a single patient
     if request.method == 'GET':
-        return Response({})
+        serializer = PatientSerializer(patient)
+        return Response(serializer.data)
+
     # delete a single patient
     elif request.method == 'DELETE':
         return Response({})
