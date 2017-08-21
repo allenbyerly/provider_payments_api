@@ -18,11 +18,16 @@ def get_delete_update_patient(request, pk):
         serializer = PatientSerializer(patient)
         return Response(serializer.data)
 
+     # update details of a single patients
+    if request.method == 'PUT':
+        serializer = PatientSerializer(patient, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     # delete a single patient
     elif request.method == 'DELETE':
-        return Response({})
-    # update details of a single patient
-    elif request.method == 'PUT':
         return Response({})
 
 
