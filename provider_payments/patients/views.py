@@ -28,7 +28,8 @@ def get_delete_update_patient(request, pk):
 
     # delete a single patient
     elif request.method == 'DELETE':
-        return Response({})
+        patient.delete() 
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'POST'])
