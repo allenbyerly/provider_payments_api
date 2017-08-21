@@ -6,10 +6,16 @@ from datetime import datetime
 import pytz
 from ..models import Patient
 from ..serializers import PatientSerializer
+import logging
 
 
 # initialize the APIClient app
 client = Client()
+
+logging.basicConfig()
+log = logging.getLogger("LOG")
+
+
 
 class GetAllPatientsTest(TestCase):
     """ Test module for GET all patients API """
@@ -102,15 +108,8 @@ class CreateNewPatientTest(TestCase):
             'social_security_number': '999-99-9999',
             'primary_care_physician': 'Dr. Who'
         }
-        dob=datetime(1969, 12, 25, 0, 0)
-        dob=timezone.localize(dob)
-        self.valid_payload = {
-            'id': '123456789',
-            'first_name': 'Hermes',
-            'date_of_birth': dob.isoformat(),
-            'social_security_number': '555-55-5555',
-            'primary_care_physician': 'Dr. Chrono'
-        }
+        log.warning(self.valid_payload)
+
         dob=datetime(1955, 5, 5, 0, 0)
         dob=timezone.localize(dob)
         self.invalid_payload = {
@@ -120,15 +119,7 @@ class CreateNewPatientTest(TestCase):
             'social_security_number': '123-45-6789',
             'primary_care_physician': 'Dr. Oz'
         }
-        dob=datetime(1955, 5, 5, 0, 0)
-        dob=timezone.localize(dob)
-        self.invalid_payload = {
-            'id':  '000000000',
-            'first_name': '',
-            'date_of_birth': dob.isoformat(),
-            'social_security_number': '222-22-2222',
-            'primary_care_physician': 'Dr. Dolittle'
-        }
+        log.warning(self.invalid_payload)
 
     def test_create_valid_patient(self):
         response = client.post(
@@ -136,6 +127,7 @@ class CreateNewPatientTest(TestCase):
             data=json.dumps(self.valid_payload),
             content_type='application/json'
         )
+        print(response)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_invalid_patient(self):
@@ -144,4 +136,59 @@ class CreateNewPatientTest(TestCase):
             data=json.dumps(self.invalid_payload),
             content_type='application/json'
         )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+class UpdateSinglePatientTest(TestCase):
+    """ Test module for updating an existing patient record """
+
+    def setUp(self):
+        timezone=pytz.timezone("America/Los_Angeles")
+
+        dob=datetime(2014, 1, 1, 0, 0)
+        dob=timezone.localize(dob)
+        self.hermes = Patient.objects.create(
+            id= '123456789', first_name='Hermes', date_of_birth=dob, social_security_number='555-55-5555', primary_care_physician='Dr. Chrono')
+
+        dob=datetime(1955, 5, 5, 0, 0)
+        dob=timezone.localize(dob)
+        self.dorothy = Patient.objects.create(
+            id= '555555555', first_name='Dorothy', date_of_birth=dob, social_security_number='123-45-6789', primary_care_physician='Dr. Oz')
+
+
+
+        dob=datetime(1955, 5, 5, 0, 0)
+        dob=timezone.localize(dob)
+        self.valid_payload = {
+            'id':  '555555555',
+            'first_name': 'Dorothy',
+            'date_of_birth': dob.isoformat(),
+            'social_security_number': '123-45-6789',
+            'primary_care_physician': 'Dr. Oz'
+        }
+        log.warning(self.valid_payload)
+
+        dob=datetime(2014, 1, 1, 0, 0)
+        dob=timezone.localize(dob)
+        self.invalid_payload = {
+            'id': '',
+            'first_name': 'Hermes',
+            'date_of_birth': dob.isoformat(),
+            'social_security_number': '555-55-5555',
+            'primary_care_physician': 'Dr. Chrono'
+        }
+        log.warning(self.invalid_payload)
+
+    def test_valid_update_patient(self):
+        response = client.put(
+            reverse('get_delete_update_patient', kwargs={'pk': self.dorothy.pk}),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_invalid_update_patient(self):
+        response = client.put(
+            reverse('get_delete_update_patient', kwargs={'pk': self.hermes.pk}),
+            data=json.dumps(self.invalid_payload),
+            content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
