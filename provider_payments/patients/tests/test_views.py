@@ -114,7 +114,7 @@ class CreateNewPatientTest(TestCase):
         dob=datetime(1955, 5, 5, 0, 0)
         dob=timezone.localize(dob)
         self.invalid_payload = {
-            'id':  '555555555',
+            'id':  '',
             'first_name': 'Dorothy',
             'date_of_birth': dob.isoformat(),
             'social_security_number': '123-45-6789',
@@ -124,7 +124,7 @@ class CreateNewPatientTest(TestCase):
         dob=timezone.localize(dob)
         self.invalid_payload = {
             'id':  '000000000',
-            'first_name': 'Alice',
+            'first_name': '',
             'date_of_birth': dob.isoformat(),
             'social_security_number': '222-22-2222',
             'primary_care_physician': 'Dr. Dolittle'

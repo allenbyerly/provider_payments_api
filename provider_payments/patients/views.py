@@ -36,3 +36,25 @@ def get_post_patients(request):
     # insert a new record for a patient
     elif request.method == 'POST':
         return Response({})
+
+@api_view(['GET', 'POST'])
+def get_post_patients(request):
+    # get all patients
+    if request.method == 'GET':
+        patients = Patient.objects.all()
+        serializer = PatientSerializer(patients, many=True)
+        return Response(serializer.data)
+    # insert a new record for a patient
+    if request.method == 'POST':
+        data = {
+            'id': request.data.get('id'),
+            'first_name': request.data.get('first_name'),
+            'date_of_birth': request.data.get('date_of_birth'),
+            'social_security_number': request.data.get('social_security_number'),
+            'primary_care_physician': request.data.get('primary_care_physician')
+        }
+        serializer = PatientSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
