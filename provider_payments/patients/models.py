@@ -50,6 +50,12 @@ class Patient(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     """
+    String for representing the Model object.
+    """
+    def __str__(self):
+        return self.first_name + ' ' + self.middle_name + ' ' + self.last_name
+
+    """
     Get Primary Care Physician
     Get the name of the patients primary care physician
     """
@@ -70,7 +76,7 @@ class Patient(models.Model):
     Get the patients name, ssn, and
     """
     def get_primary_care_physician(self):
-        return 'Patient' + ' ' + self.first_name + ' ' + 'has' + ' ' + self.primary_care_physician + ' ' + 'as the primary care physician.' 
+        return 'Patient' + ' ' + self.first_name + ' ' + 'has' + ' ' + self.primary_care_physician + ' ' + 'as the primary care physician.'
 
 
     """
