@@ -1,22 +1,22 @@
 from django.db import models
 
 
-class Patient(models.Model):
+class Patient(models.Model):Patient
     """
-    Puppy Model
-    Defines the attributes of a puppy
+    Patient Model
+    Defines the attributes of a patient
     """
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
     first_name = models.CharField(max_length=255)
     middle_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    social_security_number = models.CharField(max_length=255)
+    social_security_number
     date_of_birth = models.DateTimeField()
     gender = models.CharField(max_length=255)
     ethnicity = models.CharField(max_length=255)
     preferred_language = models.CharField(max_length=255)
     race = models.CharField(max_length=255)
-    doctor = models.IntegerField(null=True)
+    doctor = models.IntegerField()
     primary_care_physician = models.CharField(max_length=255)
     chart_id = models.CharField(max_length=255)
     patient_payment_profile = models.CharField(max_length=255)
@@ -26,7 +26,7 @@ class Patient(models.Model):
     responsible_party_phone = models.CharField(max_length=255)
     responsible_party_email = models.CharField(max_length=255)
     offices = models.CharField(max_length=255)
-    since = models.DateTimeField(auto_now=True)
+    since = models.DateTimeField()
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
@@ -53,24 +53,31 @@ class Patient(models.Model):
     Get Primary Care Physician
     Get the name of the patients primary care physician
     """
-    def get_details(self):
-        return 'Patient',
-        + ' ' + self.first_name,
-        + ' ' + self.middle_name,
-        + ' ' + self.last_name,
-        + ' ' + 'has',
-        + ' ' + self.social_security_number,
-        + ' ' + 'for a SSN',
-        + ' ' + 'and',
-        + ' ' + self.date_of_birth,
+    def get_name(self):
+        return 'Patient'
+        + ' ' + self.first_name
+        + ' ' + self.middle_name
+        + ' ' + self.last_name
+        + ' ' + 'has'
+        + ' ' + self. social_security_number
+        + ' ' + 'for a SSN'
+        + ' ' + 'and'
+        + ' ' + self. social_security_number
         + ' ' + 'for a DOB.'
 
     """
     Get Patient
     Get the patients name, ssn, and
     """
-    def get_primary_care_physician(self):
-        return 'Patient' + ' ' + self.first_name + ' ' + 'has' + ' ' + self.primary_care_physician + ' ' + 'as the primary care physician.' 
+    def get_name(self):
+        return 'Patient with SSN:'
+        + ' ' + self.social_security_number
+        + ' ' + self.middle_name
+        + ' ' + self.middle_name
+        + ' ' + self.last_name
+        + ' ' + 'has'
+        + ' ' + self.primary_care_physician
+        + ' ' + 'as the primary care physician.'
 
 
     """
