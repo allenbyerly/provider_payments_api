@@ -8,12 +8,15 @@ class PatientTest(TestCase):
     """ Test module for Patient model """
 
     def setUp(self):
-        dob=datetime(2014, 1, 1, 0, 0)
         timezone=pytz.timezone("America/Los_Angeles")
-        dob=timezone.localize(dob)
 
+        dob=datetime(2014, 1, 1, 0, 0)
+        dob=timezone.localize(dob)
         Patient.objects.create(
             id= '123456789', first_name='Hermes', date_of_birth=dob, social_security_number='555-55-5555', primary_care_physician='Dr. Chrono')
+
+        dob=datetime(1969, 12, 25, 0, 0)
+        dob=timezone.localize(dob)
         Patient.objects.create(
             id= '555555555', first_name='Horton', date_of_birth=dob, social_security_number='4123-45-6789', primary_care_physician='Dr. Who')
 

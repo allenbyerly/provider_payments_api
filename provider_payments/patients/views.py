@@ -28,7 +28,9 @@ def get_delete_update_patient(request, pk):
 def get_post_patients(request):
     # get all patients
     if request.method == 'GET':
-        return Response({})
+        patients = Patient.objects.all()
+        serializer = PatientSerializer(patients, many=True)
+        return Response(serializer.data)
     # insert a new record for a patient
     elif request.method == 'POST':
         return Response({})
