@@ -4,7 +4,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Patient
 from .serializers import PatientSerializer
+from oauth2_provider.views.generic import ProtectedResourceView
+from django.http import HttpResponse
 
+
+class ApiEndpoint(ProtectedResourceView):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('Hello, OAuth2!')
 
 @api_view(['GET', 'UPDATE', 'DELETE', 'PUT'])
 def get_delete_update_patient(request, pk):
@@ -28,7 +34,7 @@ def get_delete_update_patient(request, pk):
 
     # delete a single patient
     elif request.method == 'DELETE':
-        patient.delete() 
+        patient.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
