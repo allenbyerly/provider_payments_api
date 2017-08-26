@@ -89,3 +89,59 @@ class Patient(models.Model):
         + ' ' + self.middle_name
         + ' ' + self.last_name
         + ' ' + 'created.'
+
+class ProviderPayments(models.Model):
+    """
+    Puppy Model
+    Defines the attributes of a puppy
+    """
+    id = models.IntegerField(primary_key=True)
+    drg_definition = models.CharField(max_length=255)
+    provider_id = models.IntegerField(null=False)
+    provider_name = models.CharField(max_length=255)
+    provider_street_address = models.CharField(max_length=255)
+    provider_city = models.DateTimeField()
+    provider_state = models.CharField(max_length=255)
+    provider_zipcode = models.CharField(max_length=255)
+    hospital_referral_region_descritpion = models.CharField(max_length=255)
+    total_discharges = models.numeric(null=False)
+    average_covered_charges = models.numeric(null=False)
+    average_total_payments = models.numeric(null=False)
+    average_medicare_payments = models.numeric(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    """
+    String for representing the Model object.
+    """
+    def __str__(self):
+        return self.provider_name
+
+    """
+    Get Primary Care Physician
+    Get the name of the patients primary care physician
+    """
+    def get_details(self):
+     """   return 'Patient',
+        + ' ' + self.first_name,
+        + ' ' + self.middle_name,
+        + ' ' + self.last_name,
+        + ' ' + 'has',
+        + ' ' + self.social_security_number,
+        + ' ' + 'for a SSN',
+        + ' ' + 'and',
+        + ' ' + self.date_of_birth,
+        + ' ' + 'for a DOB.'
+    """
+    """
+    Create Patient
+    Creare a patient
+    """
+    """  def __repr__(self):
+        return 'Patient:'
+        + ' ' + self.first_name
+        + ' ' + self.middle_name
+        + ' ' + self.last_name
+        + ' ' + 'created.'
+
+    """

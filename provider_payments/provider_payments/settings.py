@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'patients',
+    'social.apps.django_app.default',
     'rest_framework',
     'oauth2_provider',
     'social_django',
