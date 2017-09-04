@@ -4,7 +4,7 @@
   "description": "Internal API for a national healthcare provider. This provider has a set of inpatient prospective payment systems providers.",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "mocha --timeout 10000",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -18,11 +18,22 @@
   },
   "homepage": "https://github.com/allenbyerly/provider_payments_api#readme",
   "devDependencies": {
+    "expect.js": "^0.3.1",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "express": "^4.15.4",
-    "mongoose": "^4.11.7"
+    "install": "^0.10.1",
+    "mocha": "^3.5.0",
+    "mongoose": "^4.11.7",
+    "mongoskin": "^2.1.0",
+    "npm": "^5.4.0",
+    "should": "^12.0.0",
+    "sinon": "^3.2.1",
+    "sinon-mongoose": "^2.0.2",
+    "superagent": "^3.6.0"
   }
 }
