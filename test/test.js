@@ -63,7 +63,7 @@ describe('Query', function() {
     it('should list ALL providers on /providers GET', function () {
         chai.request(app)
             .get('/providers')
-            .end((err, res) => {
+            .end(function (e, res) {
             res.should.have.status(200);
         res.body.should.be.a('array');
         res.body.length.should.be.eql(0);
@@ -95,7 +95,7 @@ describe('/GET providers', () => {
     it('it should GET all the providers', function() {
         chai.request(app)
             .get('/providers')
-            .end((err, res) => {
+           .end(function (e, res) {
             res.should.have.status(200);
         res.body.should.be.a('array');
         res.body.length.should.be.eql(0);
