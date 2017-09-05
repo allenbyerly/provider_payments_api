@@ -13,8 +13,6 @@ exports.query_providers = function(req, res) {
 };
 
 
-
-
 exports.create_a_provider = function(req, res) {
     var new_provider = new Provider(req.body);
     new_provider.save(function(err, provider) {
@@ -43,3 +41,14 @@ exports.update_a_provider = function(req, res) {
 };
 
 
+exports.delete_a_provider = function(req, res) {
+
+
+    Provider.remove({
+        _id: req.params.providerId
+    }, function(err, provider) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Provider successfully deleted' });
+    });
+};

@@ -1,3 +1,11 @@
+const express        = require('express');
+//const MongoClient    = require('mongodb').MongoClient;
+const bodyParser     = require('body-parser');
+const app            = express();
+const port 			 = 8000;
+
+
+
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
@@ -16,8 +24,8 @@ app.use(bodyParser.json());
 var routes = require('./api/routes/providerRoutes');
 routes(app);
 
+require('./app/routes')(app, {});
 
-app.listen(port);
-
-
-console.log("Provider Payments API Server started on: " + port);
+app.listen(port, () => {
+  console.log('The Provider API Server is live on port ' + port);
+})
