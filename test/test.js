@@ -60,7 +60,7 @@ describe('Providers', function() {
 });
 
 describe('Query', function() {
-    it('should list ALL providers on /providers GET', (done) => {
+    it('should list ALL providers on /providers GET', function () {
         chai.request(app)
             .get('/providers')
             .end((err, res) => {
@@ -68,8 +68,8 @@ describe('Query', function() {
         res.body.should.be.a('array');
         res.body.length.should.be.eql(0);
         done();
-})
-})
+    })
+    });
     it('should list a SET of providers on /providers GET with parameters');
     it('finds results that have a maximum number of total discharges with no more than the value of the max_discharges parameter');
     it('finds results that have a minimum number of total discharges with no less than the value of the min_discharges parameter');
@@ -92,7 +92,7 @@ describe('Documentation', function() {
   * Test the /GET route
   */
 describe('/GET providers', () => {
-    it('it should GET all the providers', (done) =;> {
+    it('it should GET all the providers', function() {
         chai.request(app)
             .get('/providers')
             .end((err, res) => {
@@ -100,8 +100,8 @@ describe('/GET providers', () => {
         res.body.should.be.a('array');
         res.body.length.should.be.eql(0);
         done();
-})
-}
+    })
+    };
 )
 })
 describe('express rest api server', function() {
